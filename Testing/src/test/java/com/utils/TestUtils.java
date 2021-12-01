@@ -200,7 +200,7 @@ public class TestUtils extends TestSupporter {
                 startTimecolumNo = getColumnNumForColumnName("TestRunManager", "TestStartTime");
                 endTimecolumNo = getColumnNumForColumnName("TestRunManager", "TestEndTime");
                 if (sheet.getRow(rowNo).getCell(getColumnNumForColumnName("TestRunManager", "Test Case Description")).getStringCellValue().equalsIgnoreCase(Testcase)) {
-                    sheet.getRow(rowNo).getCell(columNo).setCellValue(Status);
+                    //sheet.getRow(rowNo).getCell(columNo).setCellValue(Status);
                     sheet.getRow(rowNo).getCell(startTimecolumNo).setCellValue(startTime);
                     sheet.getRow(rowNo).getCell(endTimecolumNo).setCellValue(formatter.format(new Date()));
                     FileOutputStream fileOut = new FileOutputStream(Settings.getInstance().getResourcesDir() + "TestRunManager.xlsx");

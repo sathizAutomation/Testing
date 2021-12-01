@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +32,7 @@ import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.Status;
 import com.github.javafaker.Faker;
 import com.paulhammant.ngwebdriver.NgWebDriver;
+import com.utils.TestUtils;
 
 //import atu.alm.wrapper.enums.StatusAs;
 
@@ -52,21 +55,20 @@ public class TestSupporter {
     String dataXmlSourcePath = settings.getXMLDataSource();
     String driversPath = settings.getDriverEXEDir();
     String screenshotsPath = settings.getScreenshotsDir();
+    String Time;
     Configurations configurations = Configurations.getInstance();
     protected Report report = Report.getInstance();
     protected Utility appData = Utility.getInstance();
     protected UiDriver uidriver = new UiDriver();
     protected DBConnection dbConnection = new DBConnection();
     protected DataReader data;
-
     protected WebDriver driver;
     NgWebDriver ngDriver;
     protected ExtentTest test;
     protected Faker testData = new Faker();
     protected Configurations configurationsfile;
     protected Log log;
-
-
+    protected TestUtils testutils;
 
     @BeforeSuite
     public void clearScreenshots() {
@@ -123,16 +125,15 @@ public class TestSupporter {
 
         //Initialize the pages	
         configurationsfile = PageFactory.initElements(driver, Configurations.class);
-
-
-
-
+        testutils = PageFactory.initElements(driver, TestUtils.class);
         log = PageFactory.initElements(driver, Log.class);
 
         //browser initial set ups
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
         driver.get(url);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+		Time = formatter.format(new Date());
 
     }
 
@@ -147,32 +148,43 @@ public class TestSupporter {
      * @param method
      */
     @AfterMethod(alwaysRun = true)
-    public void cleanUp(ITestResult result, Method method) {
-        String testName;
+    public void cleanUp(ITestResult result,Method method) {
+		String testName;
 
-        Test testMethod = method.getAnnotation(Test.class);
-        if (testMethod.description().length() > 0) {
-            testName = testMethod.description().trim();
+		Test testMethod = method.getAnnotation(Test.class);
+		if (testMethod.description().length()>0) {
+			testName = testMethod.description().trim();
 
-        } else {
-            testName = "Test description is not given";
-        }
-        try {
-            if (result.getStatus() == ITestResult.FAILURE) {
-                test.log(Status.FAIL, "Exception occurred in the test -  Error Detail : " + result.getThrowable().getMessage(), takeScreenshot());
-                //updateALMStatus(testName,StatusAs.FAILED);
-            } else {
-                //updateALMStatus(testName,StatusAs.PASSED);
-            }
-            //Close and quite driver instance
-            driver.quit();
-        } catch (Exception e) {
-            test.log(Status.FAIL, "Exception occurred in the test -  Error Detail : " + result.getThrowable().getMessage(), takeScreenshot());
-            //updateALMStatus(testName,StatusAs.FAILED);
-        }
-        //Close report
-        report.closeReport();
-    }
+		}else {
+			testName = "Test description is not given";
+		}
+		try {
+			if (result.getStatus() == ITestResult.FAILURE) {
+				test.log(Status.FAIL, "Exception occurred in the test -  Error Detail : "+result.getThrowable().getMessage(),takeScreenshot());
+				//updateALMStatus(testName,StatusAs.FAILED);
+				if(configurationsfile.getProperty("updateqTest").equalsIgnoreCase("True")) {
+				//qtestConnection.submitAutomationTestLog(testName,"Failed");
+				}
+				testutils.updateStatusinExcel(testName, "Failed",Time);
+			}
+			if(result.getStatus() == ITestResult.SUCCESS)
+			{
+				//updateALMStatus(testName,StatusAs.PASSED);
+				if(configurationsfile.getProperty("updateqTest").equalsIgnoreCase("True")) {
+				//qtestConnection.submitAutomationTestLog(testName,"passed");
+				}
+				testutils.updateStatusinExcel(testName, "Passed",Time);
+			}
+			//Close and quite driver instance
+			driver.quit();
+		}catch(Exception e) {
+			e.printStackTrace();
+			test.log(Status.FAIL, "Exception occurred in the test -  Error Detail : "+result.getThrowable().getMessage(),takeScreenshot());
+			//updateALMStatus(testName,StatusAs.FAILED);
+		}
+		//Close report
+		report.closeReport();
+	}
 
     /**
 	 * 
@@ -328,4 +340,5 @@ public class TestSupporter {
             e.printStackTrace();
         }
     }
+    
 }
