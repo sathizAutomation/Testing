@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import support.Settings;
@@ -189,33 +191,31 @@ public class TestUtils extends TestSupporter {
             fs = new FileInputStream(Settings.getInstance().getResourcesDir() + "TestRunManager.xlsx");
             workbook = new XSSFWorkbook(fs);
             sheet = workbook.getSheet("TestRunManager");
-            int columNo;
+            int statuscolumNo;
             int rowNo;
             int startTimecolumNo;
             int endTimecolumNo;
+            //System.out.println("TEST");
 
             for (rowNo = 0; rowNo <= getLastRowNum("TestRunManager"); rowNo++) {
 
-                columNo = getColumnNumForColumnName("TestRunManager", "Status");
+            	statuscolumNo = getColumnNumForColumnName("TestRunManager", "Status");
                 startTimecolumNo = getColumnNumForColumnName("TestRunManager", "TestStartTime");
                 endTimecolumNo = getColumnNumForColumnName("TestRunManager", "TestEndTime");
                 if (sheet.getRow(rowNo).getCell(getColumnNumForColumnName("TestRunManager", "Test Case Description")).getStringCellValue().equalsIgnoreCase(Testcase)) {
-                    //sheet.getRow(rowNo).getCell(columNo).setCellValue(Status);
-                    sheet.getRow(rowNo).getCell(startTimecolumNo).setCellValue(startTime);
-                    sheet.getRow(rowNo).getCell(endTimecolumNo).setCellValue(formatter.format(new Date()));
+                	sheet.getRow(rowNo).createCell(statuscolumNo).setCellValue(Status);
+                    sheet.getRow(rowNo).createCell(startTimecolumNo).setCellValue(startTime);
+                    sheet.getRow(rowNo).createCell(endTimecolumNo).setCellValue(formatter.format(new Date()));
                     FileOutputStream fileOut = new FileOutputStream(Settings.getInstance().getResourcesDir() + "TestRunManager.xlsx");
                     workbook.write(fileOut);
                     fileOut.close();
                     break;
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } 
 
 
     }
