@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="NAB Digital- Smoke Pack" duration-ms="13089" started-at="2021-12-01T07:19:58Z" finished-at="2021-12-01T07:20:12Z">
+    <groups>
+      <group name="rate-price">
+        <method signature="Testcase.testcase1()[pri:0, instance:tests.Testcase@630bd5e7]" name="testcase1" class="tests.Testcase"/>
+      </group> <!-- rate-price -->
+      <group name="priority1">
+        <method signature="Testcase.testcase1()[pri:0, instance:tests.Testcase@630bd5e7]" name="testcase1" class="tests.Testcase"/>
+      </group> <!-- priority1 -->
+    </groups>
+    <test name="Smoke Test Using Chrome - SMB" duration-ms="13089" started-at="2021-12-01T07:19:58Z" finished-at="2021-12-01T07:20:12Z">
+      <class name="tests.Testcase">
+        <test-method status="PASS" signature="clearScreenshots()[pri:0, instance:tests.Testcase@630bd5e7]" name="clearScreenshots" is-config="true" duration-ms="27" started-at="2021-12-01T12:49:58Z" finished-at="2021-12-01T12:49:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearScreenshots -->
+        <test-method status="PASS" signature="initializeBrowser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.reflect.Method, org.testng.ITestContext)[pri:0, instance:tests.Testcase@630bd5e7]" name="initializeBrowser" is-config="true" duration-ms="10338" started-at="2021-12-01T12:49:58Z" finished-at="2021-12-01T12:50:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Google Chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[https://www.google.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Excel.xlsx]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[SMB]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[public void tests.Testcase.testcase1()]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a99744a]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeBrowser -->
+        <test-method status="PASS" signature="testcase1()[pri:0, instance:tests.Testcase@630bd5e7]" name="testcase1" duration-ms="621" started-at="2021-12-01T12:50:09Z" description="Testcases 1" finished-at="2021-12-01T12:50:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcase1 -->
+        <test-method status="PASS" signature="cleanUp(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:tests.Testcase@630bd5e7]" name="cleanUp" is-config="true" duration-ms="2107" started-at="2021-12-01T12:50:09Z" finished-at="2021-12-01T12:50:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcase1 status=SUCCESS method=Testcase.testcase1()[pri:0, instance:tests.Testcase@630bd5e7] output={null}]]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void tests.Testcase.testcase1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cleanUp -->
+        <test-method status="PASS" signature="testsTearDown()[pri:0, instance:tests.Testcase@630bd5e7]" name="testsTearDown" is-config="true" duration-ms="26" started-at="2021-12-01T12:50:12Z" finished-at="2021-12-01T12:50:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testsTearDown -->
+      </class> <!-- tests.Testcase -->
+    </test> <!-- Smoke Test Using Chrome - SMB -->
+  </suite> <!-- NAB Digital- Smoke Pack -->
+</testng-results>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" configfailurepolicy="continue" verbose="2" name="Failed suite [NAB Digital- Smoke Pack]" parallel="tests">
+  <parameter name="Datasource" value="Excel.xlsx"/>
+  <parameter name="SheetName" value="SMB"/>
+  <parameter name="URL" value="https://www.google.com"/>
+  <parameter name="Browser" value="Google Chrome"/>
+  <test name="Smoke Test Using Chrome - SMB(failed)" parallel="tests">
+    <parameter name="SheetName" value="SMB"/>
+    <parameter name="URL" value="https://www.google.com"/>
+    <parameter name="Browser" value="Google Chrome"/>
+    <classes>
+      <class name="tests.Testcase">
+        <methods>
+          <include name="testsTearDown"/>
+          <include name="testcase1"/>
+          <include name="clearScreenshots"/>
+          <include name="cleanUp"/>
+          <include name="initializeBrowser"/>
+        </methods>
+      </class> <!-- tests.Testcase -->
+    </classes>
+  </test> <!-- Smoke Test Using Chrome - SMB(failed) -->
+</suite> <!-- Failed suite [NAB Digital- Smoke Pack] -->

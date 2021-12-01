@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="2" name="Test Automation" parallel="tests" thread-count="1" configfailurepolicy="continue">
+	
+	<parameter name="Datasource" value="Excel.xlsx"></parameter>
+
+	<test name="Smoke Test Automation Using Chrome">
+		<parameter name="SheetName" value="Datasheet"></parameter>
+		<parameter name="Browser" value="Google Chrome"></parameter>
+		<parameter name="URL" value="https://www.google.com"></parameter>
+		<classes>
+			<class name="tests.Testcase" />
+		</classes>
+	</test>  
+
+
+	
+</suite>
+
+
