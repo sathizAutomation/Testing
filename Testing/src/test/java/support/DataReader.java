@@ -9,15 +9,15 @@ package support;
  * @description    :
  */
 public abstract class DataReader {
-	
-		
-	public String get(String string) {
-		return string;
-		
-	}
 
-	public String getTestId() {
-		return null;
-	}
+
+    public String get(String string) {
+        return string;
+
+    }
+
+    public String getTestId() {
+        return null;
+    }
 
 }

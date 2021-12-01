@@ -47,9 +47,7 @@ public class Mailing {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {				
 				return new PasswordAuthentication("usfoodstesting@gmail.com", "Testtest1");
-			}
-			
-			
+			}		
 			
 		});
 		
@@ -109,24 +107,12 @@ public class Mailing {
 		//send 
 		
 		//Step 3 : send the message using Transport class
-		Transport.send(m);
-		
-		
-		
+		Transport.send(m);		
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
-		
-		
-		
-		
-		
-	
+		}	
 		System.out.println("Sent success...................");
-		
-		
+				
 	}
 
 	//this is responsible to send email..

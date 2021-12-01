@@ -1,15 +1,15 @@
 package support;
 
 public enum BrowserName {
-	Firefox ,
+    Firefox,
 
-	Chrome,
-	
-	InternetExplorer,
-	
-	Edge,
-	
-	Safari,
-	
-	HtmlUnitDriver
+    Chrome,
+
+    InternetExplorer,
+
+    Edge,
+
+    Safari,
+
+    HtmlUnitDriver
 }

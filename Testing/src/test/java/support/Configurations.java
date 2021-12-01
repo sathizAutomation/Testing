@@ -9,46 +9,46 @@ import java.util.Properties;
  * Author 		:Sathish
  */
 public class Configurations {
-	public static Configurations configurations;
-	public Properties properties;
-	public Settings settings = Settings.getInstance();
-	public Configurations(){};
-	public static Configurations getInstance(){
-		if(configurations==null){
-			configurations= new Configurations();
-		}
-		return configurations;
-	}
-	/**
-	 * 
-	 * Method name  : setConfigurationProperties
-	  * Return types : void
-	 * Description  :
-	 */
-	public void setConfigurationProperties(){
-		String confFile = settings.getConfigurationProp();
-		properties = new Properties();
-		try {
-			InputStream inStream = new FileInputStream(confFile);
-			properties.load(inStream);
-		} catch (Exception e) {
-			new Exception("Error in reading configuration file!!!");
-		}
-	}
-	/**
-	 * 
-	 * Method name  : getProperty
-	  * Return types : String
-	 * Description  :
-	 */
-	public String getProperty(String property){
-		if(properties==null){
-			setConfigurationProperties();
-		}
-		if(properties.getProperty(property)!=null){
-			return properties.getProperty(property);
-		}else{
-			return "No such property";
-		}
-	}
+    public static Configurations configurations;
+    public Properties properties;
+    public Settings settings = Settings.getInstance();
+    public Configurations() {};
+    public static Configurations getInstance() {
+        if (configurations == null) {
+            configurations = new Configurations();
+        }
+        return configurations;
+    }
+    /**
+     * 
+     * Method name  : setConfigurationProperties
+     * Return types : void
+     * Description  :
+     */
+    public void setConfigurationProperties() {
+        String confFile = settings.getConfigurationProp();
+        properties = new Properties();
+        try {
+            InputStream inStream = new FileInputStream(confFile);
+            properties.load(inStream);
+        } catch (Exception e) {
+            new Exception("Error in reading configuration file!!!");
+        }
+    }
+    /**
+     * 
+     * Method name  : getProperty
+     * Return types : String
+     * Description  :
+     */
+    public String getProperty(String property) {
+        if (properties == null) {
+            setConfigurationProperties();
+        }
+        if (properties.getProperty(property) != null) {
+            return properties.getProperty(property);
+        } else {
+            return "No such property";
+        }
+    }
 }

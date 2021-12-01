@@ -17,82 +17,85 @@ import org.openqa.selenium.support.How;
  * @description    :This file has all the methods and page objects related to PutsBox mail page
  */
 
-public class PutsBox extends PageSupporter{
-	WebDriver driver;
-	public PutsBox(WebDriver driver) {
-		super(driver);
-		this.driver=driver;
-	}
+public class PutsBox extends PageSupporter {
+    WebDriver driver;
+    public PutsBox(WebDriver driver) {
+        super(driver);
+        this.driver = driver;
+    }
 
-	@FindAll(value = {@FindBy(how=How.CSS,using="tr")})
-	private List<WebElement> mails;
+    @FindAll(value = {
+        @FindBy(how = How.CSS, using = "tr")
+    })
+    private List < WebElement > mails;
 
-	@FindBy(how=How.LINK_TEXT,using="Inspect")
-	private WebElement refresh;
+    @FindBy(how = How.LINK_TEXT, using = "Inspect")
+    private WebElement refresh;
 
-	@FindBy(how=How.CSS,using="a[href*='clear']")
-	private WebElement clear;
+    @FindBy(how = How.CSS, using = "a[href*='clear']")
+    private WebElement clear;
 
-	@FindBy(how=How.CSS,using="a[title*='Customer Consent']")
-	private WebElement reviewAndConfirm;
+    @FindBy(how = How.CSS, using = "a[title*='Customer Consent']")
+    private WebElement reviewAndConfirm;
 
-	@FindAll(value = {@FindBy(how=How.CSS,using="td.text-pad")})
-	private List<WebElement> contents;
-	
-	/**
-	 * 
-	 * Method Name : navigateToPutsMailBox
-	 * Description : 
-	 * Author      : Sathish
-	 * Return Types: void
-	 * Paramters   : PutsBox
-	 * Date        : Nov 6, 2021
-	 * Version     : 1.0
-	 */
+    @FindAll(value = {
+        @FindBy(how = How.CSS, using = "td.text-pad")
+    })
+    private List < WebElement > contents;
 
-	public void navigateToPutsMailBox(String url) {
-		driver.navigate().to(url);
-	}
+    /**
+     * 
+     * Method Name : navigateToPutsMailBox
+     * Description : 
+     * Author      : Sathish
+     * Return Types: void
+     * Paramters   : PutsBox
+     * Date        : Nov 6, 2021
+     * Version     : 1.0
+     */
 
-	/**
-	 * 
-	 * Method Name : validateAccountNumberAndConfirmationNumberInMail
-	 * Description : This method validates the account number and confirmation number in the oh
-	 * mail - Welcome to Direct Energy!
-	 * Author      : Sathish
-	 * Return Types: String
-	 * Parameters   : PutsBox
-	 * Date        : Nov 25, 2021
-	 * Version     : 1.0
-	 */
+    public void navigateToPutsMailBox(String url) {
+        driver.navigate().to(url);
+    }
 
-	public String validateAccountNumberAndConfirmationNumberInMail(String accountNumber,String confirmationNumber) {
+    /**
+     * 
+     * Method Name : validateAccountNumberAndConfirmationNumberInMail
+     * Description : This method validates the account number and confirmation number in the mail
+     * Author      : Sathish
+     * Return Types: String
+     * Parameters   : PutsBox
+     * Date        : Nov 25, 2021
+     * Version     : 1.0
+     */
 
-		int count = 0;
-		String text;
-		wait(30);
-		while( mails.size()==0 && count<75 ) {
-			wait(1);
-			count++;
-			refresh.click();
-		}
+    public String validateAccountNumberAndConfirmationNumberInMail(String accountNumber, String confirmationNumber) {
 
-		for(WebElement mail:mails) {
-			if(mail.findElements(By.xpath("//*[contains(text(),'Welcome mail')]")).size()>0){
-				wait(3);
-				mail.findElement(By.xpath("//a[contains(text(),'HTML')]")).click();
-				switchToNewWindow();
-				waitFor(contents,15);
-				for(WebElement content :contents ) {
-					text = content.getText();
-					if(text.contains(accountNumber) && text.contains(confirmationNumber)) {
-						return "Account number and  Confirmation Number verified in the mail";
-					}
-				}
-			}
-		}
-		return "Error in verifying confirmation in the mail";
-	}
+        int count = 0;
+        String text;
+        wait(30);
+        while (mails.size() == 0 && count < 75) {
+            wait(1);
+            count++;
+            refresh.click();
+        }
+
+        for (WebElement mail: mails) {
+            if (mail.findElements(By.xpath("//*[contains(text(),'Welcome mail')]")).size() > 0) {
+                wait(3);
+                mail.findElement(By.xpath("//a[contains(text(),'HTML')]")).click();
+                switchToNewWindow();
+                waitFor(contents, 15);
+                for (WebElement content: contents) {
+                    text = content.getText();
+                    if (text.contains(accountNumber) && text.contains(confirmationNumber)) {
+                        return "Account number and  Confirmation Number verified in the mail";
+                    }
+                }
+            }
+        }
+        return "Error in verifying confirmation in the mail";
+    }
 
 
 
